@@ -16,7 +16,7 @@ function buildMatch(searchTerm) {
     ? {
         multi_match: {
           query: searchTerm,
-          fields: ["title", "description"]
+          fields: ["resumo", "referencia"]
         }
       }
     : { match_all: {} };
@@ -69,7 +69,8 @@ export default function buildRequest(state) {
       }
     },
     //https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-source-filtering.html#search-request-source-filtering
-    _source: ["id", "nps_link", "title", "description"],
+    // _source: ["id", "referencia", "resumo", "descricao"],
+    _source: ["id", "referencia"],
     aggs: {
       states: { terms: { field: "states.keyword", size: 30 } },
       world_heritage_site: {
