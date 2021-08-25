@@ -6,17 +6,30 @@ function buildFrom(current, resultsPerPage) {
 }
 
 function buildSort(sortDirection, sortField) {
+  /* TODO - Aparentemente, qdo apresenta todos os resultados, nao sorteia corretamente.
+  Parece que tem uma limitacao ao que estah no DOM. Se a base for maior que o DOM
+  precisa fazer o request novamente.
+  */
   if (sortDirection && sortField) {
-    return [{ [`${sortField}.keyword`]: sortDirection }];
+    if (sortField === 'revista'){
+      return [{ [`${sortField}.keyword`]: sortDirection }];
+    }else{
+      return [{[`${sortField}`]: {"order": sortDirection, "unmapped_type":"keyword"}}];
+    }
   }
 }
+// [{"data_iso": {"order": "asc","unmapped_type": "keyword"}}]
+// sort[0][{"data_iso": {"order": "asc","unmapped_type": "keyword"}}]
+// [{"data_iso": {"order": "asc","unmapped_type": "keyword"}}]
 
 function buildMatch(searchTerm) {
   return searchTerm
     ? {
         multi_match: {
           query: searchTerm,
-          fields: ["resumo", "referencia"]
+          fields: ["resumo", "referencia"],
+          operator:"and"
+
         }
       }
     : { match_all: {} };
@@ -62,17 +75,19 @@ export default function buildRequest(state) {
     // https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-highlighting.html
     highlight: {
       fragment_size: 200,
-      number_of_fragments: 1,
+      number_of_fragments: 0,
       fields: {
         title: {},
         description: {}
       }
     },
+    track_total_hits: true,
+
     //https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-source-filtering.html#search-request-source-filtering
     // _source: ["id", "referencia", "resumo", "descricao"],
     _source: ["id", "referencia"],
     aggs: {
-      states: { terms: { field: "states.keyword", size: 30 } },
+      programa_tema_pt: { terms: { field: "programa_tema_pt.keyword", size: 30 } },
       world_heritage_site: {
         terms: { field: "world_heritage_site" }
       },

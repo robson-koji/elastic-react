@@ -80,22 +80,32 @@ export default function App() {
                       <Sorting
                         label={"Sort by"}
                         sortOptions={[
-                          {
-                            name: "Relevance",
-                            value: "",
-                            direction: ""
-                          },
-                          {
-                            name: "Title",
-                            value: "title",
-                            direction: "asc"
-                          }
+                        {
+                          name: "Relevancia",
+                          value: "",
+                          direction: ""
+                        },
+                        {
+                          name: "Citações",
+                          value: "numero_citacoes",
+                          direction: "desc"
+                        },
+                        {
+                          name: "Data de Publicação",
+                          value: "data_iso",
+                          direction: "desc"
+                        },
+                        {
+                          name: "Revista",
+                          value: "revista",
+                          direction: "asc"
+                        }
                         ]}
                       />
                     )}
                     <Facet
-                      field="states"
-                      label="States"
+                      field="programa_tema_pt"
+                      label="Programas voltados a Temas Específicos"
                       filterType="any"
                       isFilterable={true}
                     />
