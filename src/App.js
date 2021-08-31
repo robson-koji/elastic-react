@@ -110,8 +110,8 @@ export default function App() {
                       isFilterable={true}
                     />
                     <Facet
-                      field="world_heritage_site"
-                      label="World Heritage Site?"
+                      field="area_pt"
+                      label="Área do conhecimento"
                     />
                     <Facet field="visitors" label="Visitors" filterType="any" />
                     <Facet
