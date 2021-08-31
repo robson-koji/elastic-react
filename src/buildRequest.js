@@ -88,8 +88,8 @@ export default function buildRequest(state) {
     _source: ["id", "referencia"],
     aggs: {
       programa_tema_pt: { terms: { field: "programa_tema_pt.keyword", size: 30 } },
-      world_heritage_site: {
-        terms: { field: "world_heritage_site" }
+      area_pt: {
+        terms: { field: "area_pt.keyword", size:30 }
       },
       visitors: {
         range: {

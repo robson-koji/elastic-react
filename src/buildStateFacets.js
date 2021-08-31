@@ -46,10 +46,12 @@ function getRangeFacet(aggregations, fieldName) {
 
 export default function buildStateFacets(aggregations) {
   const programa_tema_pt = getValueFacet(aggregations, "programa_tema_pt");
-  const world_heritage_site = getValueFacet(
-    aggregations,
-    "world_heritage_site"
-  );
+  const area_pt = getValueFacet(aggregations, "area_pt");
+
+  // const world_heritage_site = getValueFacet(
+  //   aggregations,
+  //   "world_heritage_site"
+  // );
   const visitors = getRangeFacet(aggregations, "visitors");
   const acres = getRangeFacet(aggregations, "acres");
 
@@ -61,7 +63,9 @@ export default function buildStateFacets(aggregations) {
   // };
 
   const facets = {
-    ...(programa_tema_pt && { programa_tema_pt })
+    ...(programa_tema_pt && { programa_tema_pt }),
+    ...(area_pt && { area_pt })
+
   };
 
   if (Object.keys(facets).length > 0) {
