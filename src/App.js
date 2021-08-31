@@ -66,8 +66,8 @@ export default function App() {
                     autocompleteResults={{
                       linkTarget: "_blank",
                       sectionTitle: "Results",
-                      titleField: "title",
-                      urlField: "nps_link",
+                      titleField: "resumo",
+                      urlField: "absolute_url_pt_t",
                       shouldTrackClickThrough: true,
                       clickThroughTags: ["test"]
                     }}
