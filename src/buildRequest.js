@@ -27,7 +27,7 @@ function buildMatch(searchTerm) {
     ? {
         multi_match: {
           query: searchTerm,
-          fields: ["resumo", "referencia"],
+          fields: ["resumo", "referencia", "referencia_en"],
           operator:"and"
 
         }
@@ -85,7 +85,7 @@ export default function buildRequest(state) {
 
     //https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-source-filtering.html#search-request-source-filtering
     // _source: ["id", "referencia", "resumo", "descricao"],
-    _source: ["id", "referencia"],
+    _source: ["id", "referencia", "resumo", "absolute_url_pt_t"],
     aggs: {
       programa_tema_pt: { terms: { field: "programa_tema_pt.keyword", size: 30 } },
       area_pt: {
