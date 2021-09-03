@@ -37,6 +37,24 @@ Alterar os estaticos toda vez que houver novo build:
   memoria/templates/memoria/react/index.html
 
 
+Build
+=====
+cd ~/projetos/elasticsearch_react/search-ui/examples/elasticsearch
+nmp run build
+tar -czvf build.tar.gz build
+scp build.tar.gz you@server:~/projetos/bv/memoria
+
+cd ~/projetos/bv/memoria
+tar -xzvf build.tar.gz
+cp -R build/static/ static/memoria/build/
+
+Acertar os estaticos em:
+~/projetos/bv/memoria/templates/memoria/react/index.html
+
+
+
+
+
 
 Pendencias
 ==========
@@ -47,5 +65,19 @@ Pendencias
 Obs:
 ===
 Iniciar em dev
-cd /home/rmoriya/projetos/search-ui/examples/elasticsearch
+cd ~/projetos/search-ui/examples/elasticsearch
 npm start
+
+
+
+Alteracoes no original
+======================
+Alterados nos pacotes babel da pasta /es
+Alterar no src e compilar estah dando erro. Resolver isso
+
+adicionando target blank para abrir novo link
+https://gitlab.com/bv_fapesp/elastic-react/-/blob/master/node_modules/@elastic/react-search-ui-views/es/Result.js
+
+@elastic - apresentando referencias 	
+https://gitlab.com/bv_fapesp/elastic-react/-/blob/master/node_modules/@elastic/react-search-ui/es/containers/Result.js
+https://gitlab.com/bv_fapesp/elastic-react/-/blob/master/node_modules/@elastic/react-search-ui/es/containers/Results.js
