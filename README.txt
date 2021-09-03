@@ -22,6 +22,11 @@ git clone https://gitlab.com/bv_fapesp/elastic-react.git
 npm install
 
 
+.env
+REACT_APP_API_URL="http://elasticsearch-api/"
+REACT_APP_ENV = “dev”
+~
+
 Deployment
 ==========
 https://create-react-app.dev/docs/deployment/
@@ -78,6 +83,6 @@ Alterar no src e compilar estah dando erro. Resolver isso
 adicionando target blank para abrir novo link
 https://gitlab.com/bv_fapesp/elastic-react/-/blob/master/node_modules/@elastic/react-search-ui-views/es/Result.js
 
-@elastic - apresentando referencias 	
+@elastic - apresentando referencias
 https://gitlab.com/bv_fapesp/elastic-react/-/blob/master/node_modules/@elastic/react-search-ui/es/containers/Result.js
 https://gitlab.com/bv_fapesp/elastic-react/-/blob/master/node_modules/@elastic/react-search-ui/es/containers/Results.js
