@@ -89,7 +89,7 @@ export default function buildRequest(state) {
     aggs: {
       programa_tema_pt: { terms: { field: "programa_tema_pt.keyword", size: 30 } },
       area_pt: {
-        terms: { field: "area_pt.keyword", size:30 }
+        terms: { field: "area_pt.keyword", size:30, order: { "_term": "asc" } }
       },
       visitors: {
         range: {
