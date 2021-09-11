@@ -1,0 +1,417 @@
+{
+		"aliases": {},
+		"settings": {
+
+            "analysis": {
+                "analyzer": {
+                    "path-analyzer": {
+                    "tokenizer": "path-tokenizer"
+                    }
+                },
+                "tokenizer": {
+                    "path-tokenizer": {
+                    "type": "path_hierarchy",
+                    "delimiter": "|"
+                    }
+                }
+            }            
+		},        
+		"mappings": {
+			"properties": {
+				"_version_": {
+					"type": "long"
+				},
+				"absolute_url_en_t": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"absolute_url_pt_t": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"ano": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"ano_inicio": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"ano_publicacao": {
+					"type": "long"
+				},
+				"ano_publicacao_exact": {
+					"type": "long"
+				},
+				"ano_termino": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"aplicacao": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"aplicacao_en": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"area_conhecimento": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"area_conhecimento_en": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"area_en": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"area_pt": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"auxilio": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"auxilio_en": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"auxilio_pesquisa_en": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"auxilio_pesquisa_pt": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"bolsa": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"bolsa_en": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"bolsas_en": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"bolsas_pt": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"citacoes_ano": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"data_iso": {
+					"type": "long"
+				},
+				"descricao": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"django_ct": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"django_id": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"id": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"infra": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"infra_en": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"numero_citacoes": {
+					"type": "long"
+				},
+				"numero_processos": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"percepcao": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"percepcao_en": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"pesquisadores_ids": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"processos": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"programa_aplicacao_en": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"programa_aplicacao_pt": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"programa_infra_en": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"programa_infra_pt": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"programa_percepcao_en": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"programa_percepcao_pt": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"programa_tema_en": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"programa_tema_pt": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"referencia": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"referencia_en": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"resumo": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"revista": {
+                    "type": "text",
+                    "analyzer": "path-analyzer",
+                    "search_analyzer": "keyword",
+                    "fielddata": true
+				},
+				"revista_sort": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"revista_text": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"tema": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"tema_en": {
+					"type": "text",
+					"fields": {
+						"keyword": {
+							"type": "keyword",
+							"ignore_above": 256
+						}
+					}
+				},
+				"timestamp": {
+					"type": "date"
+				}
+			}
+		}
+
+	}
