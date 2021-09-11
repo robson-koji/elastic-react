@@ -1,4 +1,7 @@
 import buildRequestFilter from "./buildRequestFilter";
+import {buildRequestPostFilter, buildRequestFilterAggs} from "./buildRequestFilter";
+
+
 
 function buildFrom(current, resultsPerPage) {
   if (!current || !resultsPerPage) return;
@@ -53,7 +56,7 @@ function buildMatch(searchTerm) {
 
   We then do similar things for searchTerm, filters, sort, etc.
 */
-export default function buildRequest(state) {
+export default function buildRequest(state) { 
   const {
     current,
     filters,
@@ -68,6 +71,8 @@ export default function buildRequest(state) {
   const size = resultsPerPage;
   const from = buildFrom(current, resultsPerPage);
   const filter = buildRequestFilter(filters);
+  const post_filter = buildRequestPostFilter(filters);
+  const filter_aggs = buildRequestFilterAggs(filters);
 
   const body = {
     // Static query Configuration
@@ -86,10 +91,36 @@ export default function buildRequest(state) {
     //https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-source-filtering.html#search-request-source-filtering
     // _source: ["id", "referencia", "resumo", "descricao"],
     _source: ["id", "referencia", "resumo", "absolute_url_pt_t"],
+    aggs: filter_aggs, 
+    
+    
+    
+    
+    /*
+    {"area_pt":{"terms":{"field":["area_pt"],"size":3000,"order":{"_term":"asc"}}},
+    "programa_tema_pt":{"terms":{"field":["programa_tema_pt.keyword"],"size":3000,"order":{"_term":"asc"}}},
+
+
     aggs: {
-      programa_tema_pt: { terms: { field: "programa_tema_pt.keyword", size: 30 } },
+
+      _filter_programa_tema_pt: {
+        filter: {
+          bool:{
+            must:[
+              {term:{area_pt: "Ciências Sociais Aplicadas"}}, 
+              {term:{area_pt: "Ciências Humanas"}}           
+            ]
+          }
+        },
+        aggs: {
+          programa_tema_pt: {
+            terms: { field: "programa_tema_pt.keyword", size: 3000 }
+          }
+        }
+      },
+      // programa_tema_pt: { terms: { field: "programa_tema_pt.keyword", size: 3000 } },
       area_pt: {
-        terms: { field: "area_pt.keyword", size:30, order: { "_term": "asc" } }
+        terms: { field: "area_pt", size:3000, order: { "_term": "asc" } }
       },
       visitors: {
         range: {
@@ -117,6 +148,9 @@ export default function buildRequest(state) {
         }
       }
     },
+    */
+
+    post_filter,
 
     // Dynamic values based on current Search UI state
     // --------------------------
@@ -124,7 +158,7 @@ export default function buildRequest(state) {
     query: {
       bool: {
         must: [match],
-        ...(filter && { filter })
+        // ...(filter && { filter })
       }
     },
     // https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-sort.html
@@ -133,6 +167,6 @@ export default function buildRequest(state) {
     ...(size && { size }),
     ...(from && { from })
   };
-
+  // debugger;
   return body;
 }

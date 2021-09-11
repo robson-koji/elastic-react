@@ -59,12 +59,30 @@ function buildResults(hits) {
 
   We do similar things for facets and totals.
 */
+
+
+function cleanFilteredFacets(facets){
+  if (!facets) return;
+
+  let recover_facet = {}  
+  facets = Object.entries(facets).forEach(([key, value]) => {
+    const key_clean = key.split("filter_").pop()
+    // recover_facet.push( key.startsWith('_filter_') ? { [key_clean]:value[key_clean] } : { [key]:value } )
+    if ( key.startsWith('_filter_')){
+      recover_facet[[key_clean]] = value[key_clean]
+    } else{
+      recover_facet[[key]] = value
+    }      
+  });
+  return recover_facet
+}
+
+
 export default function buildState(response, resultsPerPage) {
   const results = buildResults(response.hits.hits);
   const totalResults = buildTotalResults(response.hits);
   const totalPages = buildTotalPages(resultsPerPage, totalResults);
-  const facets = buildStateFacets(response.aggregations);
-
+  const facets = buildStateFacets(cleanFilteredFacets(response.aggregations));
   return {
     results,
     totalPages,
