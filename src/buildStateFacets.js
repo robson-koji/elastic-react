@@ -44,16 +44,106 @@ function getRangeFacet(aggregations, fieldName) {
   }
 }
 
+
+class HierachicalFacet {
+  constructor(facet) {    
+    this.facet = facet;      
+    this.hierarchicalFacets = [];
+    // eslint-disable-next-line no-unused-expressions
+    this.nextFacet;
+  }
+  
+  rebuild() {
+      const facetSplit = this.facet.map(elem => {
+          this.count = elem.count;
+          // console.log(JSON.stringify(value))
+          elem.value.split("|").map(
+              (value, idx, array) => {
+                  let targetFacet = idx === 0 ? this.hierarchicalFacets : this.nextFacet.children
+                  let currentFacet = targetFacet.find(obj => obj.value === value)
+
+                  if (! currentFacet ){
+                      // console.log(JSON.stringify(value))
+                      let idxNextFacet = targetFacet.push({'value':value, 'count':this.count, children:[]})
+                      this.nextFacet = targetFacet[idxNextFacet-1]
+                  }else{
+                      // currentFacet.count += this.count;
+                      this.nextFacet = currentFacet;
+                  } 
+              }
+          )
+      });
+      return(this.hierarchicalFacets);
+  }
+}
+
+// const newObj = new HierachicalFacet(mainObj)
+// const newFacet = newObj.rebuild()
+// console.log(newFacet)
+// debugger;
+
 export default function buildStateFacets(aggregations) {
-  const programa_tema_pt = getValueFacet(aggregations, "programa_tema_pt");
+  const auxilio_pesquisa_pt = getValueFacet(aggregations, "auxilio_pesquisa_pt");
+  const bolsas_pt = getValueFacet(aggregations, "bolsas_pt");  
   const area_pt = getValueFacet(aggregations, "area_pt");
+  const programa_tema_pt = getValueFacet(aggregations, "programa_tema_pt");
+  const programa_infra_pt = getValueFacet(aggregations, "programa_infra_pt");
+  const programa_aplicacao_pt = getValueFacet(aggregations, "programa_aplicacao_pt");
+  const programa_percepcao_pt = getValueFacet(aggregations, "programa_percepcao_pt");
+  const ano_inicio = getValueFacet(aggregations, "ano_inicio");
+  const revista = getValueFacet(aggregations, "revista");
+  let newObj; 
+
+  if (auxilio_pesquisa_pt !== undefined){
+    newObj = new HierachicalFacet(auxilio_pesquisa_pt[0].data)
+    auxilio_pesquisa_pt[0].data = newObj.rebuild()
+  }
+  if (bolsas_pt !== undefined){
+    newObj = new HierachicalFacet(bolsas_pt[0].data)
+    bolsas_pt[0].data = newObj.rebuild()
+  }  
+  if (area_pt !== undefined){
+    newObj = new HierachicalFacet(area_pt[0].data)
+    area_pt[0].data = newObj.rebuild()
+  }
+  if (programa_tema_pt !== undefined){
+    newObj = new HierachicalFacet(programa_tema_pt[0].data)
+    programa_tema_pt[0].data = newObj.rebuild()
+  }
+  if (programa_infra_pt !== undefined){
+    newObj = new HierachicalFacet(programa_infra_pt[0].data)
+    programa_infra_pt[0].data = newObj.rebuild()
+  }
+  if (programa_aplicacao_pt !== undefined){
+    newObj = new HierachicalFacet(programa_aplicacao_pt[0].data)
+    programa_aplicacao_pt[0].data = newObj.rebuild()
+  }  
+  if (programa_percepcao_pt !== undefined){
+    newObj = new HierachicalFacet(programa_percepcao_pt[0].data)
+    programa_percepcao_pt[0].data = newObj.rebuild()
+  }
+  if (ano_inicio !== undefined){
+    newObj = new HierachicalFacet(ano_inicio[0].data)
+    ano_inicio[0].data = newObj.rebuild()
+  }
+  if (bolsas_pt !== undefined){
+    newObj = new HierachicalFacet(bolsas_pt[0].data)
+    bolsas_pt[0].data = newObj.rebuild()
+  }  
+
+
+
+
+
+
+  // debugger;
 
   // const world_heritage_site = getValueFacet(
   //   aggregations,
   //   "world_heritage_site"
   // );
-  const visitors = getRangeFacet(aggregations, "visitors");
-  const acres = getRangeFacet(aggregations, "acres");
+  // const visitors = getRangeFacet(aggregations, "visitors");
+  // const acres = getRangeFacet(aggregations, "acres");
 
   // const facets = {
   //   ...(programa_tema_pt && { programa_tema_pt }),
@@ -63,8 +153,18 @@ export default function buildStateFacets(aggregations) {
   // };
 
   const facets = {
+    ...(auxilio_pesquisa_pt && { auxilio_pesquisa_pt }),
+    ...(bolsas_pt && { bolsas_pt }),
+    ...(area_pt && { area_pt }),
+    ...(programa_infra_pt && { programa_infra_pt }),
     ...(programa_tema_pt && { programa_tema_pt }),
-    ...(area_pt && { area_pt })
+    ...(programa_aplicacao_pt && { programa_aplicacao_pt }),
+    ...(programa_percepcao_pt && { programa_percepcao_pt }),
+    ...(ano_inicio && { ano_inicio }),
+    ...(revista && { revista })
+
+  
+  
 
   };
 
