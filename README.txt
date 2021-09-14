@@ -1,31 +1,62 @@
-Projeto original:
-https://github.com/elastic/search-ui
+Projeto clone do original:
+https://gitlab.com/bv_fapesp/search-ui
+Nunca deverá se alterado diretamente. Somente qdo sincronizado com o original.
 
-Este projeto eh um fork desta pasta:
-https://github.com/elastic/search-ui/tree/master/examples/elasticsearch
+Projeto com as dependencias (packages) alterados:
+https://gitlab.com/bv_fapesp/custom-search-ui
+Aqui sobem as alteracoes feitas sobre o original
 
-Para manter este projeto atualizado com o original:
+Projeto base (vem como exemplo dentro do projeto original)
+https://gitlab.com/bv_fapesp/elastic-react
+Este projeto vem como exemplo dentro do projeto original e usa os pacotes acima como 
+dependencia. 
+Com a estrutura atual, poderah vir a ser alterad diretamente no projeto custom-search-ui,
+mas por ora estao em projetos separados.
 
-Clonar este projeto
+COMO USAR
+
+Clonar os dois projetos dentro de uma mesma pasta
 git clone https://gitlab.com/bv_fapesp/elastic-react.git
+git clone https://gitlab.com/bv_fapesp/custom-search-ui
 
-dentro desta pasta do projeto original, que dever ser um clone do projeto original.
-/search-ui/examples/
+npm install nos dois projetos
 
-Qdo precisar sincronizar, dar o pull e resolver as pendencias:
-https://github.com/elastic/search-ui.git
-
-
-Como usar este projeto
-======================
-git clone https://gitlab.com/bv_fapesp/elastic-react.git
-npm install
-
+node_modules/@elastic -> ../../search-ui/packages/
 
 .env
 REACT_APP_API_URL="http://elasticsearch-api/"
 REACT_APP_ENV = “dev”
-~
+
+
+===========================================================================
+
+
+Build
+=====
+cd ~/projetos/elasticsearch_react/elastic-react
+nmp run build
+
+Até aqui, ele builda na pasta ~/projetos/elasticsearch_react/elastic-react/build
+Este ambiente tem o .env, e ele sobe automaticamente na porta 5000. Basta 
+ter o servidor "serve" instalado. 
+
+tar -czvf build.tar.gz build
+scp build.tar.gz you@server:~/projetos/bv/memoria
+
+cd ~/projetos/bv/memoria
+tar -xzvf build.tar.gz
+
+Limpa diretorio de estaticos
+rm -rf  static/memoria/build/
+cp -R build/static/ static/memoria/build/
+
+Acertar os estaticos em:
+~/projetos/bv/memoria/templates/memoria/react/index.html
+
+com as referencias daqui:
+~/projetos/bv/memoria/build/index.html
+
+
 
 Deployment
 ==========
@@ -40,49 +71,3 @@ Por enquanto carrega um iframe na pg acima. Depois ver como isolar os CSSs.
 
 Alterar os estaticos toda vez que houver novo build:
   memoria/templates/memoria/react/index.html
-
-
-Build
-=====
-cd ~/projetos/elasticsearch_react/search-ui/examples/elasticsearch
-nmp run build
-tar -czvf build.tar.gz build
-scp build.tar.gz you@server:~/projetos/bv/memoria
-
-cd ~/projetos/bv/memoria
-tar -xzvf build.tar.gz
-cp -R build/static/ static/memoria/build/
-
-Acertar os estaticos em:
-~/projetos/bv/memoria/templates/memoria/react/index.html
-
-
-
-
-
-
-Pendencias
-==========
-- Trabalhar nos facets
-- Trabalhar nos componentes originais e tentar compilar.
-
-
-Obs:
-===
-Iniciar em dev
-cd ~/projetos/search-ui/examples/elasticsearch
-npm start
-
-
-
-Alteracoes no original
-======================
-Alterados nos pacotes babel da pasta /es
-Alterar no src e compilar estah dando erro. Resolver isso
-
-adicionando target blank para abrir novo link
-https://gitlab.com/bv_fapesp/elastic-react/-/blob/master/node_modules/@elastic/react-search-ui-views/es/Result.js
-
-@elastic - apresentando referencias
-https://gitlab.com/bv_fapesp/elastic-react/-/blob/master/node_modules/@elastic/react-search-ui/es/containers/Result.js
-https://gitlab.com/bv_fapesp/elastic-react/-/blob/master/node_modules/@elastic/react-search-ui/es/containers/Results.js

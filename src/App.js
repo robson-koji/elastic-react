@@ -176,8 +176,6 @@ export default function App() {
                 }
                 bodyContent={
                   <Results
-                    titleField="title"
-                    urlField="nps_link"
                     shouldTrackClickThrough={true}
                   />
                 }
