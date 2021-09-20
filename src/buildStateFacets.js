@@ -60,11 +60,11 @@ class HierachicalFacet {
           elem.value.split("|").map(
               (value, idx, array) => {
                   let targetFacet = idx === 0 ? this.hierarchicalFacets : this.nextFacet.children
-                  let currentFacet = targetFacet.find(obj => obj.value === value)
+                  let currentFacet = targetFacet.find(obj => obj.value_chk === value)
 
                   if (! currentFacet ){
                       // console.log(JSON.stringify(value))
-                      let idxNextFacet = targetFacet.push({'value':value, 'count':this.count, children:[]})
+                      let idxNextFacet = targetFacet.push({'value_chk':value, 'value':array.join('|'), 'count':this.count, children:[]})
                       this.nextFacet = targetFacet[idxNextFacet-1]
                   }else{
                       // currentFacet.count += this.count;
@@ -73,6 +73,7 @@ class HierachicalFacet {
               }
           )
       });
+      // debugger;
       return(this.hierarchicalFacets);
   }
 }
@@ -126,12 +127,10 @@ export default function buildStateFacets(aggregations) {
     newObj = new HierachicalFacet(ano_inicio[0].data)
     ano_inicio[0].data = newObj.rebuild()
   }
-  if (bolsas_pt !== undefined){
-    newObj = new HierachicalFacet(bolsas_pt[0].data)
-    bolsas_pt[0].data = newObj.rebuild()
-  }  
-
-
+  if (revista !== undefined){
+    newObj = new HierachicalFacet(revista[0].data)
+    revista[0].data = newObj.rebuild()
+  }
 
 
 
