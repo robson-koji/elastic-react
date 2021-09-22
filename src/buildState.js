@@ -6,6 +6,38 @@ function buildTotalPages(resultsPerPage, totalResults) {
   return Math.ceil(totalResults / resultsPerPage);
 }
 
+
+function fillHistogramDateCharts(buckets, field){
+  const today_year = new Date().getFullYear()
+  let start_year = 1990
+  let filled = []
+  
+  if (field == 'doc_count'){
+    filled = buckets.map( elem =>({'date':elem.key, 'value':elem[field]}))
+  }
+  else{
+    filled = buckets.map( elem =>({'date':elem.key, 'value':elem[field].value}))
+  }
+  while (start_year < today_year){
+    if (! filled.find(o => o.date === start_year)){
+      filled.push({'date':start_year, 'value':0})
+    }
+    start_year++;
+  }
+  filled.sort((a,b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0))//.reverse()
+
+  // debugger;
+  return filled
+}
+  
+function buildStateCharts(aggs){
+  if (!aggs) return;
+  return {
+    'numero_citacoes': fillHistogramDateCharts(aggs['_filter_numero_citacoes']['numero_citacoes']['buckets'], 'numero_citacoes'),
+    'ano_publicacao_exact': fillHistogramDateCharts(aggs['_filter_ano_publicacao_exact']['ano_publicacao_exact']['buckets'], 'doc_count')
+  }
+}
+
 function buildTotalResults(hits) {
   return hits.total.value;
 }
@@ -83,10 +115,13 @@ export default function buildState(response, resultsPerPage) {
   const totalResults = buildTotalResults(response.hits);
   const totalPages = buildTotalPages(resultsPerPage, totalResults);
   const facets = buildStateFacets(cleanFilteredFacets(response.aggregations));
+  const charts = buildStateCharts(response.aggregations);
   return {
     results,
     totalPages,
     totalResults,
-    ...(facets && { facets })
+    ...(facets && { facets }),
+    ...(charts && { charts })
+
   };
 }

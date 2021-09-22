@@ -1,4 +1,4 @@
-import buildRequestFilter from "./buildRequestFilter";
+// import buildRequestFilter from "./buildRequestFilter";
 import {buildRequestPostFilter, buildRequestFilterAggs} from "./buildRequestFilter";
 
 
@@ -70,7 +70,7 @@ export default function buildRequest(state) {
   const match = buildMatch(searchTerm);
   const size = resultsPerPage;
   const from = buildFrom(current, resultsPerPage);
-  const filter = buildRequestFilter(filters);
+  // const filter = buildRequestFilter(filters);
   const post_filter = buildRequestPostFilter(filters);
   const filter_aggs = buildRequestFilterAggs(filters);
 
