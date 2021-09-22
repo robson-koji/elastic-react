@@ -12,7 +12,7 @@ import {
   Paging,
   Sorting
 } from "@elastic/react-search-ui";
-import { Layout, SingleSelectFacet } from "@elastic/react-search-ui-views";
+import { Layout } from "@elastic/react-search-ui-views";
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
 
 import buildRequest from "./buildRequest";
@@ -21,16 +21,23 @@ import applyDisjunctiveFaceting from "./applyDisjunctiveFaceting";
 import buildState from "./buildState";
 
 
+import {BarChart} from "@elastic/react-search-ui";
+
+
 /* Bug no chrome nao funciona o F8, atualmente na versao 83.
 Qdo o bug for consertado, remover isso */
 
 document.addEventListener('keydown', function (e) {
-  if (e.keyCode == 119) { // F8
+  if (e.keyCode === 119) { // F8
       debugger;
   }
 }, {
   capture: true
 });
+
+
+
+
 
 
 const config = {
@@ -61,7 +68,16 @@ const config = {
       state,
       ["visitors", "states"]
     );
-    return buildState(responseJsonWithDisjunctiveFacetCounts, resultsPerPage);
+    
+    const bs = buildState(responseJsonWithDisjunctiveFacetCounts, resultsPerPage);
+    const body_div = document.getElementsByClassName('sui-layout-body')[0];
+    if (bs.facets === undefined){    
+      body_div.style.display = 'none';
+    }
+    else{
+      body_div.style.display = 'block';
+    }
+    return bs
   }
 };
 
@@ -158,7 +174,7 @@ export default function App() {
                     <Facet
                       field="ano_inicio"
                       label="Ano de início do Auxílio / Bolsa"
-                    />
+                    /> 
                     <Facet
                       field="revista"
                       label="Revista"
@@ -166,13 +182,25 @@ export default function App() {
                       isFilterable={true}
                     />
 
-                    <Facet field="visitors" label="Visitors" filterType="any" />
-                    <Facet
-                      field="acres"
-                      label="Acres"
-                      view={SingleSelectFacet}
-                    />
+
                   </div>
+                }
+                chartContent={
+                  <React.Fragment>                  
+                    {wasSearched && <BarChart 
+                      data={'numero_citacoes'}
+                      titulo={'Citações por ano (Web of Science)'} 
+                      wos_div={'.sui-layout-body-chart-citations'}
+                    />}
+
+                      {wasSearched && <BarChart 
+                      data={'ano_publicacao_exact'}
+                      titulo={'Publicações por ano'} 
+                      wos_div={'.sui-layout-body-chart-articles'}
+                    />}
+
+
+                  </React.Fragment>
                 }
                 bodyContent={
                   <Results

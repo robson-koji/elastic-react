@@ -19,6 +19,7 @@ function getValueFacet(aggregations, fieldName) {
   }
 }
 
+/*
 function getRangeFacet(aggregations, fieldName) {
   if (
     aggregations &&
@@ -43,6 +44,7 @@ function getRangeFacet(aggregations, fieldName) {
     ];
   }
 }
+*/
 
 
 class HierachicalFacet {
@@ -54,7 +56,7 @@ class HierachicalFacet {
   }
   
   rebuild() {
-      const facetSplit = this.facet.map(elem => {
+      this.facet.map(elem => {
           this.count = elem.count;
           // console.log(JSON.stringify(value))
           elem.value.split("|").map(
@@ -78,10 +80,12 @@ class HierachicalFacet {
   }
 }
 
-// const newObj = new HierachicalFacet(mainObj)
-// const newFacet = newObj.rebuild()
-// console.log(newFacet)
-// debugger;
+/* TODO
+// Generalizar a funcao abaixo utilizando esta lista. 
+facets_lst = [auxilio_pesquisa_pt, bolsas_pt, area_pt, programa_tema_pt,
+              programa_infra_pt, programa_aplicacao_pt, programa_percepcao_pt, 
+              ano_inicio, revista]
+*/
 
 export default function buildStateFacets(aggregations) {
   const auxilio_pesquisa_pt = getValueFacet(aggregations, "auxilio_pesquisa_pt");
@@ -132,25 +136,6 @@ export default function buildStateFacets(aggregations) {
     revista[0].data = newObj.rebuild()
   }
 
-
-
-
-  // debugger;
-
-  // const world_heritage_site = getValueFacet(
-  //   aggregations,
-  //   "world_heritage_site"
-  // );
-  // const visitors = getRangeFacet(aggregations, "visitors");
-  // const acres = getRangeFacet(aggregations, "acres");
-
-  // const facets = {
-  //   ...(programa_tema_pt && { programa_tema_pt }),
-  //   ...(world_heritage_site && { world_heritage_site }),
-  //   ...(visitors && { visitors }),
-  //   ...(acres && { acres })
-  // };
-
   const facets = {
     ...(auxilio_pesquisa_pt && { auxilio_pesquisa_pt }),
     ...(bolsas_pt && { bolsas_pt }),
@@ -161,10 +146,6 @@ export default function buildStateFacets(aggregations) {
     ...(programa_percepcao_pt && { programa_percepcao_pt }),
     ...(ano_inicio && { ano_inicio }),
     ...(revista && { revista })
-
-  
-  
-
   };
 
   if (Object.keys(facets).length > 0) {
