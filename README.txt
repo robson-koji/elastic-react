@@ -15,12 +15,20 @@ mas por ora estao em projetos separados.
 
 COMO USAR
 
+
+CLONAR
+======
 Clonar os dois projetos dentro de uma mesma pasta
 git clone https://gitlab.com/bv_fapesp/elastic-react.git
 git clone https://gitlab.com/bv_fapesp/custom-search-ui
 
+NPM INSTALL
+===========
 npm install nos dois projetos
 
+LINKAR OS DOIS PROJETOS
+=======================
+na pasta node_modules do elastic-react.git, fazer o link para o outro. 
 node_modules/@elastic -> ../../search-ui/packages/
 
 REACT DUPLICADO
