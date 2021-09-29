@@ -23,6 +23,15 @@ npm install nos dois projetos
 
 node_modules/@elastic -> ../../search-ui/packages/
 
+REACT DUPLICADO
+===============
+Após npm install nos dois projetos, apagar o pacote react dos projetos abaixo pq estah dando conflito.
+
+search-ui/packages/react-search-ui-views/node_modules
+search-ui/packages/react-search-ui/node_modules
+
+
+
 .env
 REACT_APP_API_URL="http://elasticsearch-api/"
 REACT_APP_ENV = “dev”
