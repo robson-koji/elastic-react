@@ -1,4 +1,5 @@
 import React from "react";
+import i18n from './i18n';
 
 import {
   ErrorBoundary,
@@ -107,25 +108,25 @@ export default function App() {
                   <div>
                     {wasSearched && (
                       <Sorting
-                        label={"Sort by"}
+                        label= {i18n.t("Ordenar")}
                         sortOptions={[
                         {
-                          name: "Relevancia",
+                          name: i18n.t("Relevância"),
                           value: "",
                           direction: ""
                         },
                         {
-                          name: "Citações",
+                          name: i18n.t("Citações"),
                           value: "numero_citacoes",
                           direction: "desc"
                         },
                         {
-                          name: "Data de Publicação",
+                          name: i18n.t("Data de Publicação"),
                           value: "data_iso",
                           direction: "desc"
                         },
                         {
-                          name: "Revista",
+                          name: i18n.t("Revista"),
                           value: "revista",
                           direction: "asc"
                         }
@@ -133,51 +134,51 @@ export default function App() {
                       />
                     )}
                     <Facet
-                      field="auxilio_pesquisa_pt"
-                      label="Auxílios à Pesquisa"
+                      field={i18n.t("auxilio_pesquisa_pt")}
+                      label={i18n.t("Auxílios à Pesquisa")}
                       filterType="any"
                       isFilterable={true}
                     />
                     <Facet
-                      field="bolsas_pt"
-                      label="Bolsas"
+                      field={i18n.t("bolsas_pt")}
+                      label={i18n.t("Bolsas")}
                       filterType="any"                      
                     />
                     <Facet
-                      field="programa_tema_pt"
-                      label="Programas voltados a Temas Específicos"
+                      field={i18n.t("programa_tema_pt")}
+                      label={i18n.t("Programas voltados a Temas Específicos")}
                       filterType="any"
                       isFilterable={true}
                     />                    
                     <Facet
-                      field="programa_aplicacao_pt"
-                      label="Programas de Pesquisa direcionados a Aplicações"
+                      field={i18n.t("programa_aplicacao_pt")}
+                      label={i18n.t("Programas de Pesquisa direcionados a Aplicações")}
                       filterType="any"                      
                     />
                     <Facet
-                      field="programa_percepcao_pt"
-                      label="Programas de Percepção Pública da Ciência"
+                      field={i18n.t("programa_percepcao_pt")}
+                      label={i18n.t("Programas de Percepção Pública da Ciência")}
                       filterType="any"                      
                     />
                      <Facet
-                      field="programa_infra_pt"
-                      label="Programas de Infraestrutura de Pesquisa"
+                      field={i18n.t("programa_infra_pt")}
+                      label={i18n.t("Programas de Infraestrutura de Pesquisa")}
                       filterType="any"
                       isFilterable={true}
                     />
                     <Facet
-                      field="area_pt"
-                      label="Área do conhecimento"
+                      field={i18n.t("area_pt")}
+                      label={i18n.t("Área do conhecimento")}
                       filterType="any"
                       isFilterable={true}
                     />
                     <Facet
-                      field="ano_inicio"
-                      label="Ano de início do Auxílio / Bolsa"
+                      field={i18n.t("ano_inicio")}
+                      label={i18n.t("Ano de início do Auxílio / Bolsa")}
                     /> 
                     <Facet
-                      field="revista"
-                      label="Revista"
+                      field={i18n.t("revista")}
+                      label={i18n.t("Revista")}
                       filterType="any"
                       isFilterable={true}
                     />
@@ -189,13 +190,13 @@ export default function App() {
                   <React.Fragment>                  
                     {wasSearched && <BarChart 
                       data={'numero_citacoes'}
-                      titulo={'Citações por ano (Web of Science)'} 
+                      titulo={i18n.t("Citações por ano (Web of Science)")} 
                       wos_div={'.sui-layout-body-chart-citations'}
                     />}
 
                       {wasSearched && <BarChart 
                       data={'ano_publicacao_exact'}
-                      titulo={'Publicações por ano'} 
+                      titulo={i18n.t("Publicações por ano")} 
                       wos_div={'.sui-layout-body-chart-articles'}
                     />}
 
