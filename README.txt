@@ -15,13 +15,33 @@ mas por ora estao em projetos separados.
 
 COMO USAR
 
+
+CLONAR
+======
 Clonar os dois projetos dentro de uma mesma pasta
 git clone https://gitlab.com/bv_fapesp/elastic-react.git
 git clone https://gitlab.com/bv_fapesp/custom-search-ui
 
+NPM INSTALL
+===========
 npm install nos dois projetos
 
+LINKAR OS DOIS PROJETOS
+=======================
+Na pasta node_modules do elastic-react.git, fazer o link para o custom-search-ui. 
 node_modules/@elastic -> ../../search-ui/packages/
+
+Se instalar algum pacote no elastic-react.git após estar linkado, vai dar problema e precisa 
+reinstalar os pacotes no custom-search-ui. Precisa resolver essa dependencia de outra maneira.
+
+REACT DUPLICADO
+===============
+Após npm install nos dois projetos, apagar o pacote react dos projetos abaixo pq estah dando conflito.
+
+search-ui/packages/react-search-ui-views/node_modules
+search-ui/packages/react-search-ui/node_modules
+
+
 
 .env
 REACT_APP_API_URL="http://elasticsearch-api/"
