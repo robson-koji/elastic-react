@@ -32,7 +32,7 @@ Na pasta node_modules do elastic-react.git, fazer o link para o custom-search-ui
 node_modules/@elastic -> ../../search-ui/packages/
 
 Se instalar algum pacote no elastic-react.git após estar linkado, vai dar problema e precisa 
-reinstalar os pacotes no custom-search-ui
+reinstalar os pacotes no custom-search-ui. Precisa resolver essa dependencia de outra maneira.
 
 REACT DUPLICADO
 ===============
