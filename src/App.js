@@ -85,8 +85,8 @@ const config = {
 export default function App() {
   return (
     <SearchProvider config={config}>
-      <WithSearch mapContextToProps={({ wasSearched }) => ({ wasSearched })}>
-        {({ wasSearched }) => (
+      <WithSearch mapContextToProps={({ wasSearched, hasResults }) => ({ wasSearched, hasResults })}>
+        {({ wasSearched, hasResults }) => (
           <div className="App">
             <ErrorBoundary>
               <Layout
@@ -106,7 +106,7 @@ export default function App() {
                 }
                 sideContent={
                   <div>
-                    {wasSearched && (
+                    {hasResults && (
                       <Sorting
                         label= {i18n.t("Ordenar")}
                         sortOptions={[
@@ -210,11 +210,11 @@ export default function App() {
                 }
                 bodyHeader={
                   <React.Fragment>
-                    {wasSearched && <PagingInfo />}
-                    {wasSearched && <ResultsPerPage />}
+                    {hasResults && <PagingInfo />}
+                    {hasResults && <ResultsPerPage />}
                   </React.Fragment>
                 }
-                bodyFooter={<Paging />}
+                bodyFooter={hasResults && <Paging />}
               />
             </ErrorBoundary>
           </div>

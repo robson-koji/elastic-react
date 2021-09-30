@@ -14,11 +14,11 @@ function buildSort(sortDirection, sortField) {
   precisa fazer o request novamente.
   */
   if (sortDirection && sortField) {
-    if (sortField === i18n.t('revista')){
-      return [{ [`${sortField}.keyword`]: sortDirection }];
-    }else{
+    // if (sortField === i18n.t('revista')){
+    //   return [{ [`${sortField}.keyword`]: sortDirection }];
+    // }else{
       return [{[`${sortField}`]: {"order": sortDirection, "unmapped_type":"keyword"}}];
-    }
+    // }
   }
 }
 // [{"data_iso": {"order": "asc","unmapped_type": "keyword"}}]
