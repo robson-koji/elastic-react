@@ -7,6 +7,7 @@ function buildTotalPages(resultsPerPage, totalResults) {
 }
 
 
+// d3
 function fillHistogramDateCharts(buckets, field){
   const today_year = new Date().getFullYear()
   let start_year = 1990
@@ -111,6 +112,7 @@ function cleanFilteredFacets(facets){
 
 
 export default function buildState(response, resultsPerPage) {
+  window.hit = response.hits.hits;
   const results = buildResults(response.hits.hits);
   const totalResults = buildTotalResults(response.hits);
   const totalPages = buildTotalPages(resultsPerPage, totalResults);
