@@ -12,7 +12,7 @@ function fillHistogramDateCharts(buckets, field){
   let start_year = 1990
   let filled = []
   
-  if (field == 'doc_count'){
+  if (field === 'doc_count'){
     filled = buckets.map( elem =>({'date':elem.key, 'value':elem[field]}))
   }
   else{

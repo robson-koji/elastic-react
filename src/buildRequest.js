@@ -1,6 +1,6 @@
 // import buildRequestFilter from "./buildRequestFilter";
 import {buildRequestPostFilter, buildRequestFilterAggs} from "./buildRequestFilter";
-
+import i18n from "i18next";
 
 
 function buildFrom(current, resultsPerPage) {
@@ -14,7 +14,7 @@ function buildSort(sortDirection, sortField) {
   precisa fazer o request novamente.
   */
   if (sortDirection && sortField) {
-    if (sortField === 'revista'){
+    if (sortField === i18n.t('revista')){
       return [{ [`${sortField}.keyword`]: sortDirection }];
     }else{
       return [{[`${sortField}`]: {"order": sortDirection, "unmapped_type":"keyword"}}];
@@ -90,19 +90,16 @@ export default function buildRequest(state) {
 
     //https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-source-filtering.html#search-request-source-filtering
     // _source: ["id", "referencia", "resumo", "descricao"],
-    _source: ["id", "referencia", "resumo", "absolute_url_pt_t"],
+    
+    _source: ["id", i18n.t("referencia"), "resumo", "absolute_url_pt_t"],
     aggs: filter_aggs, 
-    
-    
     
     
     /*
     {"area_pt":{"terms":{"field":["area_pt"],"size":3000,"order":{"_term":"asc"}}},
     "programa_tema_pt":{"terms":{"field":["programa_tema_pt.keyword"],"size":3000,"order":{"_term":"asc"}}},
 
-
     aggs: {
-
       _filter_programa_tema_pt: {
         filter: {
           bool:{

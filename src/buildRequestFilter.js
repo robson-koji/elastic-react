@@ -1,3 +1,18 @@
+import i18n from "i18next";
+
+/* TODO Centralizar configuracao de facet em um arquivo. 
+Hoje estah espalhado por todos os componentes */
+const facets = [i18n.t('area_pt'), 
+                i18n.t('programa_tema_pt'), 
+                i18n.t('programa_infra_pt'),  
+                i18n.t('programa_aplicacao_pt'),  
+                i18n.t('programa_percepcao_pt'),  
+                i18n.t('auxilio_pesquisa_pt'),  
+                i18n.t('ano_inicio'),  
+                i18n.t('revista'),  
+                i18n.t('bolsas_pt')] 
+
+
 function getTermFilterValue(field, fieldValue) {
   // We do this because if the value is a boolean value, we need to apply
   // our filter differently. We're also only storing the string representation
@@ -8,9 +23,8 @@ function getTermFilterValue(field, fieldValue) {
     return { [field]: fieldValue === "true" };
   }
 
-  // debugger;
   return { [`${field}`]: fieldValue };
-  if (field == 'area_pt'){return { [`${field}`]: fieldValue }; }
+  if (field === i18n.t('area_pt')){return { [`${field}`]: fieldValue }; }
   return { [`${field}.keyword`]: fieldValue };
 }
 
@@ -66,14 +80,11 @@ function getRangeFilter(filter) {
   }
 }
 
-
-// 'auxilio_pesquisa_pt', 'bolsas_pt', 'ano_inicio', 'revista', 'bolsas_pt'
-
 export default function buildRequestFilter(filters) {
   if (!filters) return;
 
   filters = filters.reduce((acc, filter) => {
-    if (["programa_tema_pt","programa_infra_pt", "area_pt", 'programa_aplicacao_pt', 'programa_percepcao_pt', 'auxilio_pesquisa_pt', 'ano_inicio', 'revista', 'bolsas_pt'].includes(filter.field)) {
+    if (facets.includes(filter.field)) {
       return [...acc, getTermFilter(filter)];
     }
     if (["acres", "visitors"].includes(filter.field)) {
@@ -100,22 +111,6 @@ export function buildRequestPostFilter(filters) {
   if (filters.length < 1) return;
   return filters;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Centralizar configuracao de facet em um arquivo. 
-Hoje estah espalhado por todos os componentes */
-const facets = ['area_pt', 'programa_tema_pt', 'programa_infra_pt', 'programa_aplicacao_pt', 'programa_percepcao_pt', 'auxilio_pesquisa_pt', 'ano_inicio', 'revista', 'bolsas_pt']
 
 function aggNoFilter(agg,facet){
   agg[[facet]] = {
@@ -153,7 +148,7 @@ function aggWithFilter(agg, facet, termFilterValue){
 function filterVsFacet(facet, filters){
   // Return facets that will be filtered by other facets.
   let termFilterValue = filters.filter( (filter) => {   
-    if (filter.field != facet){
+    if (filter.field !== facet){
       return filter.values.map( (value) => {
         return getTermFilterValue(filter.field, value)
       })
@@ -174,7 +169,6 @@ export function buildRequestFilterAggs(filters) {
     else{
       aggNoFilter(agg,facet)    
     }
-    // console.log(agg)
   });
   
   
