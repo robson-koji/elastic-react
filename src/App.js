@@ -1,3 +1,4 @@
+
 import React from "react";
 import i18n from './i18n';
 
@@ -11,7 +12,8 @@ import {
   PagingInfo,
   ResultsPerPage,
   Paging,
-  Sorting
+  Sorting,
+  Messages
 } from "@elastic/react-search-ui";
 import { Layout } from "@elastic/react-search-ui-views";
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
@@ -23,6 +25,7 @@ import buildState from "./buildState";
 
 
 import {BarChart} from "@elastic/react-search-ui";
+
 
 
 /* Bug no chrome nao funciona o F8, atualmente na versao 83.
@@ -103,6 +106,14 @@ export default function App() {
                     }}
                     autocompleteSuggestions={true}
                   />
+                  
+
+                }
+                messagesContent={
+                  <div>
+                  {wasSearched && ! hasResults && (<Messages />)
+                  }
+                  </div>
                 }
                 sideContent={
                   <div>
