@@ -43,7 +43,8 @@ i18n.use(LanguageDetector).init({
         "revista": "revista",
 
         "referencia": "referencia",
-        "absolute_url_pt_t":"absolute_url_pt_t"
+        "absolute_url_pt_t":"absolute_url_pt_t",
+        "Nenhuma publicação localizada para a busca:": "Nenhuma publicação localizada para a busca:"
       }
     },
     en: {
@@ -82,7 +83,9 @@ i18n.use(LanguageDetector).init({
         "revista": "revista",
        
         "referencia": "referencia_en",
-        "absolute_url_pt_t": "absolute_url_en_t"       
+        "absolute_url_pt_t": "absolute_url_en_t",  
+
+        "Nenhuma publicação localizada para a busca:": "Article not found for:"
 
       }
     }
