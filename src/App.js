@@ -72,10 +72,10 @@ const config = {
       state,
       ["visitors", "states"]
     );
-    
+
     const bs = buildState(responseJsonWithDisjunctiveFacetCounts, resultsPerPage);
     const body_div = document.getElementsByClassName('sui-layout-body')[0];
-    if (bs.facets === undefined){    
+    if (bs.facets === undefined){
       body_div.style.display = 'none';
     }
     else{
@@ -106,9 +106,23 @@ export default function App() {
                     }}
                     autocompleteSuggestions={true}
                   />
-                  
-
                 }
+
+                chartContent={
+                  <React.Fragment>
+                      {wasSearched && <BarChart
+                      data={'ano_publicacao_exact'}
+                      titulo={i18n.t("Publicações por ano")}
+                      wos_div={'.sui-layout-body-chart-articles'}
+                    />}
+                    {/* {wasSearched && <BarChart
+                      data={'numero_citacoes'}
+                      titulo={i18n.t("Citações por ano (Web of Science)")}
+                      wos_div={'.sui-layout-body-chart-citations'}
+                    />}*/}
+                  </React.Fragment>
+                }
+
                 messagesContent={
                   <div>
                   {wasSearched && ! hasResults && (<Messages />)
@@ -153,23 +167,23 @@ export default function App() {
                     <Facet
                       field={i18n.t("bolsas_pt")}
                       label={i18n.t("Bolsas")}
-                      filterType="any"                      
+                      filterType="any"
                     />
                     <Facet
                       field={i18n.t("programa_tema_pt")}
                       label={i18n.t("Programas voltados a Temas Específicos")}
                       filterType="any"
                       isFilterable={true}
-                    />                    
+                    />
                     <Facet
                       field={i18n.t("programa_aplicacao_pt")}
                       label={i18n.t("Programas de Pesquisa direcionados a Aplicações")}
-                      filterType="any"                      
+                      filterType="any"
                     />
                     <Facet
                       field={i18n.t("programa_percepcao_pt")}
                       label={i18n.t("Programas de Percepção Pública da Ciência")}
-                      filterType="any"                      
+                      filterType="any"
                     />
                      <Facet
                       field={i18n.t("programa_infra_pt")}
@@ -186,7 +200,7 @@ export default function App() {
                     <Facet
                       field={i18n.t("ano_inicio")}
                       label={i18n.t("Ano de início do Auxílio / Bolsa")}
-                    /> 
+                    />
                     <Facet
                       field={i18n.t("revista")}
                       label={i18n.t("Revista")}
@@ -197,23 +211,7 @@ export default function App() {
 
                   </div>
                 }
-                chartContent={
-                  <React.Fragment>                  
-                    {wasSearched && <BarChart 
-                      data={'numero_citacoes'}
-                      titulo={i18n.t("Citações por ano (Web of Science)")} 
-                      wos_div={'.sui-layout-body-chart-citations'}
-                    />}
 
-                      {wasSearched && <BarChart 
-                      data={'ano_publicacao_exact'}
-                      titulo={i18n.t("Publicações por ano")} 
-                      wos_div={'.sui-layout-body-chart-articles'}
-                    />}
-
-
-                  </React.Fragment>
-                }
                 bodyContent={
                   <Results
                     shouldTrackClickThrough={true}
