@@ -8,8 +8,8 @@ Aqui sobem as alteracoes feitas sobre o original
 
 Projeto base (vem como exemplo dentro do projeto original)
 https://gitlab.com/bv_fapesp/elastic-react
-Este projeto vem como exemplo dentro do projeto original e usa os pacotes acima como 
-dependencia. 
+Este projeto vem como exemplo dentro do projeto original e usa os pacotes acima como
+dependencia.
 Com a estrutura atual, poderah vir a ser alterad diretamente no projeto custom-search-ui,
 mas por ora estao em projetos separados.
 
@@ -28,10 +28,10 @@ npm install nos dois projetos
 
 LINKAR OS DOIS PROJETOS
 =======================
-Na pasta node_modules do elastic-react.git, fazer o link para o custom-search-ui. 
+Na pasta node_modules do elastic-react.git, fazer o link para o custom-search-ui.
 node_modules/@elastic -> ../../search-ui/packages/
 
-Se instalar algum pacote no elastic-react.git após estar linkado, vai dar problema e precisa 
+Se instalar algum pacote no elastic-react.git após estar linkado, vai dar problema e precisa
 reinstalar os pacotes no custom-search-ui. Precisa resolver essa dependencia de outra maneira.
 
 REACT DUPLICADO
@@ -57,8 +57,8 @@ cd ~/projetos/elasticsearch_react/elastic-react
 nmp run build
 
 Até aqui, ele builda na pasta ~/projetos/elasticsearch_react/elastic-react/build
-Este ambiente tem o .env, e ele sobe automaticamente na porta 5000. Basta 
-ter o servidor "serve" instalado. 
+Este ambiente tem o .env, e ele sobe automaticamente na porta 5000. Basta
+ter o servidor "serve" instalado.
 
 tar -czvf build.tar.gz build
 scp build.tar.gz you@server:~/projetos/bv/memoria
@@ -84,7 +84,7 @@ https://create-react-app.dev/docs/deployment/
 Pasta static do build vem aqui:
   memoria/static/
 Essa eh a home page em:
-  http://shedar.fapesp.br:9000/pt/memoria/publicacoes-cientificas-rct/
+  http://<server>/pt/memoria/publicacoes-cientificas-rct/
   memoria/templates/memoria/publicacoes_cientificas_rct.html
 Por enquanto carrega um iframe na pg acima. Depois ver como isolar os CSSs.
   memoria/templates/memoria/react/
